@@ -97,7 +97,7 @@ analytics:
 # Site Author
 author:
   name             : "Seung Kim"
-  avatar           : "/Users/m21camby/Desktop/PhD/blog_github/m21camby.github.io/seal.jpg"
+  avatar           : "/images/seal.jpg"
   bio              : "I am a constant amateur person."	
   location         : "Germany"
   email            : "m21camby@gmail.com"
