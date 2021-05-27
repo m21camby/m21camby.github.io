@@ -7,6 +7,9 @@
 
 Bayesian network는 (G, $\theta$)로 되어 있다. G는 directed acyclic graph를 말하고 $\theta$는 network를 구성하는parameters set을 말한다.
 
+You can use $$\LaTeX$$ to typeset formulas. A formula can be displayed inline, e.g. $$e=mc^2$$, or as a block:
+$$\int_\Omega \nabla u \cdot \nabla v~dx = \int_\Omega fv~dx$$
+Also check out this [LaTeX introduction](https://en.wikibooks.org/wiki/LaTeX/Mathematics).
 
 출처: Data Analysis with Bayesian Networks: A Bootstrap Approach
 
