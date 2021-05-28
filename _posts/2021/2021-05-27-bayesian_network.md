@@ -2,8 +2,8 @@
 layout: post
 title: Bayesian Network 요약
 date: 2021-05-27
-categories: [Bayesian]
-tag: [causal-inference, bayesian, DAG, probability, gaussian-bayesian-network,data-analysis]
+#categories: [Bayesian]
+#tag: [causal-inference, bayesian, DAG, probability, gaussian-bayesian-network,data-analysis]
 comments: true
 ---
 
