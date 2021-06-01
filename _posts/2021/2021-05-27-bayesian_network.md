@@ -7,6 +7,14 @@ date: 2021-05-27
 comments: true
 ---
 
+먼저, 쉬운 **2. 모수 추정** 방법에 대해 먼저 설명드리겠습니다.
+GBN은 $i$번째 노드인 $X_i$가 local하게 정규분포를 따른다 가정합니다.
+
+   $$
+   X_{i}=\mu_{X_{i}}+\Pi_{X_{i}} \boldsymbol{\beta}_{X_{i}}+\varepsilon_{X_{i}}, \quad \varepsilon_{X_{i}} \sim N\left(0, \sigma_{X_{i}}^{2}\right)
+   $$
+
+
 만약에 the amount of data is not enough to induce a high scoring network.
 해결책으로 Efron's Bootstrap a� a compu­ tationally efficient approach for answering these questions. 
 
