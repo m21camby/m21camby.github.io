@@ -7,12 +7,29 @@ date: 2021-05-27
 comments: true
 ---
 
+이번 post는 **Gene regulatory network (GRN)**를 modeling에서 **Bayesian network (BN)**이 어떻게 적용되는지에 대해서 간단하게 요약해 보았다.
+
+일반적으로 Bulk data의 GRN을 위해서 사용되는 방법은 BN 외에도 주로 correlation, regression, ordinary differential equations (ODEs), mutual information (MI), Gaussian graphical models 그리고 BN이다. 각각의 방법들은 아래와 같이 서로 다른 pros and cons가 있다.  
+
+* correlation-based method는 assumptions에 dependent하지 않고 computationally efficient하다는 장점이 있다. 그리고 비슷한 functions 또는 regulation되는 group genes을 찾는데 용이하다. 반면 directionality를 알 수 없고 다른 information의 integration을 통해 interpretability를 높일 수가 없다. (WGCNA)
+
+* Regression-based method는 linear cascades에 대해서는 잘 modeling을 하지만 feed-forward loops에 대해서는 그렇지 못하다. (GENIE3)
+
+* MI 방식은 genes의 pairs간의 degree of dependencies에 의해서 network structure가 결정된다. directionality와 potential causality를 잘 추론할 수 있고 Regression-based method과 반대로 feed-forward loops에 대해서 높은 정확도를 나타내고 반면 linear cascades에 대해서는 limited performance를 나타낸다. 
+
+* BN 방식은 prior information을 integration하기가 용이하고 causal/directional gene–gene interactions을 추론할 수가 있다. 단점으로는 higher computation cost와 optimal topology를 찾는 확률이 조금 떨어진다. 다른 방식의 표현으로 large p & small n problem으로 structure learning시의 genes의 숫자가 너무 많은 NP-hard의 문제에 직면하기에 다른 방법들과 비교해서 적은 수의 small networks를 구성할 수밖에 없다.     
+
+
+---
+
+## BN 카테고리
+
 Bayesian network modelling은 크게 2가지의 category로 나눌 수 있다. 
 
 * **Discrete Bayesian networks**: global과 local distributions이 multinomia으로 가정되는 경우 사용된다. association measures로 사용되는 방법은  mutual information (log-likelihood ratio) and
 Pearson’s X2이다. 
 
-* **Gaussian Bayesian networks**: global distribution is multivariate normal이고  local distributions are univariate normals linked by linear dependence relationships. Association is measured by various estimators of Pearson’s correlation.
+* **Gaussian Bayesian networks**: global distribution is multivariate normal이고 local distributions이 univariate normals이여서 global과 local이 linear dependence relationships 연결되어 있는 경우 사용한다. Association is measured by various estimators of Pearson’s correlation.
 
 
 
@@ -94,6 +111,11 @@ Score-based algorithms은 여러 DAG을 생성한 다음 가장 큰 network scor
 Hybrid algorithms은 constraint-based을 우선 사용해서 DAGs 후보들의 space를 줄이고 나서 score-based strategy로 가장 큰 score를 찾는 방법이다.   
 
 
+## The constraint-based approach
+use statistical or information measures to test the conditional independence (CI) between variables. These methods rely heavily on the threshold selected for CI tests. High-order CI tests using large condition sets may be unreliable with the limitation of data size.
+
+## score approach
+traverse all possible structures using certain search algorithms to find the optimal one that maximizes the scoring function. In addition, prior knowledge can be easily incorporated into the model through the prior probability term in the scoring function. The search methods are heuristic and do not guarantee global optimal in most cases in consideration of large search space.
 
 
 데이타 타입
