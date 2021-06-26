@@ -161,9 +161,14 @@ Also check out this [LaTeX introduction](https://en.wikibooks.org/wiki/LaTeX/Mat
 
 규제화(regularization)는 일부 미지수의 값을 아주 작게 만들어 그 영향을 줄임으로써 마치 미지수의 개수가 적어진 효과를 가져온다. 가중치 값이 커지는 것을 막는다는 제한, 규제의 의미가 있데 이런 규제화의 종류에는 L1 norm(노름)과 L2 norm이 존재한다.
 
-$$\sum_{n=1}^{10} n^2$$
+$$
+\sum_{n=1}^{10} n^2
+$$
 
 
+   $$
+   X_{i}=\mu_{X_{i}}+\Pi_{X_{i}} \boldsymbol{\beta}_{X_{i}}+\varepsilon_{X_{i}}, \quad \varepsilon_{X_{i}} \sim N\left(0, \sigma_{X_{i}}^{2}\right)
+   $$
 
 
 출처: Data Analysis with Bayesian Networks: A Bootstrap Approach
