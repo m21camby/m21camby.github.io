@@ -5,7 +5,14 @@ date: 2021-05-27
 #categories: [Bayesian]
 #tag: [causal-inference, bayesian, DAG, probability, gaussian-bayesian-network,data-analysis]
 comments: true
+output: 
+  html_document:
+    toc: true
+    toc_depth: 4
+    toc_float: true
+    code_folding: hide
 ---
+
 
 이번 post는 **Gene regulatory network (GRN)**를 modeling에서 **Bayesian network (BN)**이 어떻게 적용되는지에 대해서 간단하게 요약해 보았다.
 
@@ -29,8 +36,7 @@ Bayesian network modelling은 크게 2가지의 category로 나눌 수 있다.
 * **Discrete Bayesian networks**: global과 local distributions이 multinomia으로 가정되는 경우 사용된다. association measures로 사용되는 방법은  mutual information (log-likelihood ratio) and
 Pearson’s X2이다. 
 
-* **Gaussian Bayesian networks**: global distribution is multivariate normal이고 local distributions이 univariate normals이여서 global과 local이 linear dependence relationships 연결되어 있는 경우 사용한다. Association is measured by various estimators of Pearson’s correlation.
-
+* **Gaussian Bayesian networks**: global distribution is multivariate normal이고 local distributions이 univariate normals이여서 global과 local이 linear dependence relationships 연결되어 있는 경우 사용한다. Association은 Pearson’s correlation이 사용된다.
 
 
 Gaussian Bayesian networks
@@ -44,54 +50,46 @@ Gaussian Bayesian networks
 * 각 node의 local distribution은 intercept을 포함하고 interaction term이 없는 Gaussian linear model로 표현될 수 있다. 
 
 
-먼저, 쉬운 **2. 모수 추정** 방법에 대해 먼저 설명드리겠습니다.
-GBN은 $i$번째 노드인 $X_i$가 local하게 정규분포를 따른다 가정합니다.
-
-   $$
-   X_{i}=\mu_{X_{i}}+\Pi_{X_{i}} \boldsymbol{\beta}_{X_{i}}+\varepsilon_{X_{i}}, \quad \varepsilon_{X_{i}} \sim N\left(0, \sigma_{X_{i}}^{2}\right)
-   $$
-
-
-만약에 the amount of data is not enough to induce a high scoring network.
-해결책으로 Efron's Bootstrap a� a compu­ tationally efficient approach for answering these questions. 
-
-네트워크를 더 높은 score로 얻기 위해서는 when learning structure, we can use prior knowledge on the structures we are searching to reduce the �ize of the search space, and thus improve both the speed of mducuon and more importantly, the quality of the learned network. Commonly used prior information include order­ ing constraints on the random variables, or the existence of certain arcs. 즉, constrain the search process을 주는 것이다.
-
 ## 생물학적 데이터 적용의 문제점
 
-* 일반적으로 small sizes of available data sets (n  p) sample size increases, the information present in
-the data dominates the information provided in the prior and determines the overall behaviour of the model. For small sample sizes:
+sample size가충분히 large 하면 문제가 없지만 일반적으로 데이터의 양이 부족해서 (small sizes of available data sets) high scoring network 얻기 힘들다. 
 
+결국에는 제공된 information에 의해서 지배되고 model을 전반적으로 결정한다. 
 
+* 과연  discrete and Gaussian assumptions이 이러한 data에 잘 적용이 될 것인가하는 의문이 든다. 
 
-* 과연  discrete and Gaussian assumptions really sensible for these kinds of data 즉, Gene expression data are modelled as continuous random variables either assuming a Gaussian distribution or applying results from robust statistics.
+* batch effects이 있을 수 있다.
 
-* batch effects introduced by the instruments and the chemical reactions used in collecting the data.
-
----
 ## 해결법
 
- Inference procedures are
-usually unable to identify a single best BN, settling instead on a set
-of equally well behaved models. For this reason, it is important to
-incorporate prior biological knowledge into the network through the
-use of informative priors
+해결책으로 **Bootstrapping**이 computationally 효과적인 approach이다. 
 
-the prior distribution plays a much larger role because there is
-not enough data available to disprove the assumptions the prior
-encodes;
+다른방법으로는 prior biological knowledge를 통해서 search space의 size를 줄이고 learning structure를 향상시킬 수 있다.
+
+방법으로 random variables에 대해서 ordering constraints을 주거나 certain arc에 대해서 미리 정보를 주는 것이다. 즉,  search process에 constrain을 주는 것이다. 
+
+* 그리고 마지막으로 genes의 subset으로만 모델링을 진행하는 것이다.
 
 
-![](/images/feature_selected.png){: width = "400", height="300"}
+![](/images/feature_selected.png){: width = "500", height="400"}
 
-그리고 for sequence data, we aim to find the subset of genes
 
----
 ## bootstrapping
 
+bootstrap (non-parametric)은 아무런 distributional assumptions이 없다. 
+
+
+
+
+
 sample size가충분히 large 하면 문제가 없지만
+
+
+
+small training sets에서는 bootstrap에 의한 constraints scoring networks가 더 우수한 것으로 알려져 있다. 
+
+
 특히, for small training sets we can find slightly better scoring networks using the constraints generated by the bootstrap.
-(non-parametric) bootstrap that doesn't make any distributional assumptions
 하지만 If you are provided with small sample size (as a sidelight, what is "small" seems to depend on some underlying customary rule in each research field), no bootstrap will do the magic.
 예를들어 Assuming a database contains three observations for each of the two variables under investigation, no inference will make sense.
 
@@ -109,6 +107,8 @@ Constraint-based algorithms은 conditional independence constraints을 statistic
 Score-based algorithms은 여러 DAG을 생성한 다음 가장 큰 network score을 찾는 방법이다.
 
 Hybrid algorithms은 constraint-based을 우선 사용해서 DAGs 후보들의 space를 줄이고 나서 score-based strategy로 가장 큰 score를 찾는 방법이다.   
+
+* 과연  discrete and Gaussian assumptions really sensible for these kinds of data 즉, Gene expression data are modelled as continuous random variables either assuming a Gaussian distribution or applying results from robust statistics.
 
 
 ## The constraint-based approach
@@ -132,6 +132,8 @@ graph into the true graph. It turns out that
 𝑆𝐻𝐷 = 𝐹𝑁 + 𝐹𝑃 (3)
 where arc reversals fall either under 𝐹𝑁 or 𝐹𝑃.
 
+
+* 과연  discrete and Gaussian assumptions really sensible for these kinds of data 즉, Gene expression data are modelled as continuous random variables either assuming a Gaussian distribution or applying results from robust statistics.
 
 우선 Discrete networks에서는score-based algorithms often have higher SHDs for small samples
 
