@@ -167,6 +167,8 @@ $$\sum_{n=1}^{10} n^2$$
 $$X_{i}=\mu_{X_{i}}+\Pi_{X_{i}} \boldsymbol{\beta}_{X_{i}}+\varepsilon_{X_{i}}, \quad \varepsilon_{X_{i}} \sim N\left(0, \sigma_{X_{i}}^{2}\right)$$
 
 
+$r~{contrast}~ = \sqrt{\left( \frac{t^2}{t^2+7441} \right)}$
+
 출처: Data Analysis with Bayesian Networks: A Bootstrap Approach
 Who Learns Better Bayesian Network Structures Constraint-Based, Score-based or Hybrid Algorithms?
 https://stats.stackexchange.com/questions/112147/can-bootstrap-be-seen-as-a-cure-for-the-small-sample-size
