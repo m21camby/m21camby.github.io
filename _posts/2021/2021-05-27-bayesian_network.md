@@ -157,6 +157,15 @@ You can use $$\LaTeX$$ to typeset formulas. A formula can be displayed inline, e
 $$\int_\Omega \nabla u \cdot \nabla v~dx = \int_\Omega fv~dx$$
 Also check out this [LaTeX introduction](https://en.wikibooks.org/wiki/LaTeX/Mathematics).
 
+## L1 norm
+
+규제화(regularization)는 일부 미지수의 값을 아주 작게 만들어 그 영향을 줄임으로써 마치 미지수의 개수가 적어진 효과를 가져온다. 가중치 값이 커지는 것을 막는다는 제한, 규제의 의미가 있데 이런 규제화의 종류에는 L1 norm(노름)과 L2 norm이 존재한다.
+
+$$\sum_{n=1}^{10} n^2$$
+
+
+
+
 출처: Data Analysis with Bayesian Networks: A Bootstrap Approach
 Who Learns Better Bayesian Network Structures Constraint-Based, Score-based or Hybrid Algorithms?
 https://stats.stackexchange.com/questions/112147/can-bootstrap-be-seen-as-a-cure-for-the-small-sample-size
