@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "math test"
+title: "Bayesian network 정리"
 #categories: [Bayesian]
 #tag: [causal-inference, bayesian, DAG, probability, gaussian-bayesian-network,data-analysis]
 comments: true
